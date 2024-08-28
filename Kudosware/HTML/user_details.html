@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<?php
+// Check if an error message is passed
+if (isset($_GET['error'])) {
+    echo "<p class='error'>" . htmlspecialchars($_GET['error']) . "</p>";
+} else {
+    // Display user details from query parameters
+    $name = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : '';
+    $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+    $phone = isset($_GET['phone']) ? htmlspecialchars($_GET['phone']) : '';
+    $resume = isset($_GET['resume']) ? htmlspecialchars($_GET['resume']) : '';
+
+    echo "<h1>User Details</h1>";
+    echo "<p><strong>Name:</strong> $name</p>";
+    echo "<p><strong>Email:</strong> $email</p>";
+    echo "<p><strong>Phone:</strong> $phone</p>";
+    
+    if (!empty($resume)) {
+        echo "<p><strong>Resume:</strong> <a href='$resume' download>Download Resume</a></p>";
+    } else {
+        echo "<p>No resume uploaded.</p>";
+    }
+}
+?>
+
+</body>
+</html>
